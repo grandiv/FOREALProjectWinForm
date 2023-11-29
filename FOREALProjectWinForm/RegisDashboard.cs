@@ -32,16 +32,9 @@ namespace FOREALProjectWinForm
                     return;
                 }
 
-                System.Data.SqlClient.SqlConnection con = new System.Data.SqlClient.SqlConnection();
-                con.ConnectionString = "Server=tcp:forealserver.database.windows.net,1433;Initial Catalog=FOREAL;Persist Security Info=False;User ID=grandiv;Password=Vidnarg12345$;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;";
-                SqlCommand cmd = new SqlCommand();
-                cmd.Connection = con;
+                SqlCommand cmd = SqlConnection.GetSqlCon();
 
-                con.Open();
-
-                cmd.CommandText = "SELECT COUNT(*) FROM loginTable WHERE Username = @Username";
-                cmd.Parameters.AddWithValue("@Username", usernameNew);
-                int userCount = (int)cmd.ExecuteScalar();
+                int userCount = UsernameCheck(usernameNew, cmd);
 
                 if (userCount > 0)
                 {
@@ -57,8 +50,6 @@ namespace FOREALProjectWinForm
                     cmd.ExecuteNonQuery();
                     MessageBox.Show("Registration Completed");
                 }
-
-                con.Close();
             }
             catch (Exception)
             {
@@ -69,6 +60,14 @@ namespace FOREALProjectWinForm
             logForm.Show();
             txtUsernameNew.Clear();
             txtPasswordNew.Clear();
+        }
+
+        private static int UsernameCheck(string usernameNew, SqlCommand cmd)
+        {
+            cmd.CommandText = "SELECT COUNT(*) FROM loginTable WHERE Username = @Username";
+            cmd.Parameters.AddWithValue("@Username", usernameNew);
+            int userCount = (int)cmd.ExecuteScalar();
+            return userCount;
         }
 
         private void txtUsernameNew_MouseClick(object sender, MouseEventArgs e)

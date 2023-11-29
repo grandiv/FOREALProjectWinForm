@@ -69,7 +69,7 @@ namespace FOREALProjectWinForm
                 string username, pass;
                 OutLogin(out username, out pass);
 
-                SqlCommand cmd = SqlConnection.GetSqlConDonation();
+                SqlCommand cmd = SqlConnection.GetSqlCon();
 
                 CredentialCheck(username, pass, cmd);
 

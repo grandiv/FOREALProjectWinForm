@@ -40,6 +40,14 @@ namespace FOREALProjectWinForm
             quantity = Convert.ToInt32(txtQuantity.Text);
             dateTime = dateTimePicker1.Value;
         }
+        private static void InputDonation(string name, string location, string foodType, int quantity, DateTime dateTime, SqlCommand cmd)
+        {
+            cmd.CommandText = "insert into AddDonation values('" + name + "','" + location + "','" + foodType + "'," + quantity + ",'" + dateTime + "')";
+
+            SqlDataAdapter DA = new SqlDataAdapter(cmd);
+            DataSet DS = new DataSet();
+            DA.Fill(DS);
+        }
         private void SubmitDonation_Click(object sender, EventArgs e)
         {
             try
@@ -49,13 +57,9 @@ namespace FOREALProjectWinForm
                 DateTime dateTime;
                 OutDonation(out name, out location, out foodType, out quantity, out dateTime);
 
-                SqlCommand cmd = SqlConnection.GetSqlConDonation();
+                SqlCommand cmd = SqlConnection.GetSqlCon();
 
-                cmd.CommandText = "insert into AddDonation values('" + name + "','" + location + "','" + foodType + "'," + quantity + ",'" + dateTime + "')";
-
-                SqlDataAdapter DA = new SqlDataAdapter(cmd);
-                DataSet DS = new DataSet();
-                DA.Fill(DS);
+                InputDonation(name, location, foodType, quantity, dateTime, cmd);
                 MessageBox.Show("Food Donated! Thank you");
             }
             catch (Exception)
