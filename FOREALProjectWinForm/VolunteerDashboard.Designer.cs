@@ -165,7 +165,7 @@
             this.btnExit.Size = new System.Drawing.Size(23, 23);
             this.btnExit.TabIndex = 30;
             this.btnExit.UseVisualStyleBackColor = false;
-            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            this.btnExit.Click += new System.EventHandler(this.BtnExit_Click);
             // 
             // VolunteerDashboard
             // 

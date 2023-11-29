@@ -1,13 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace FOREALProjectWinForm
@@ -18,12 +11,14 @@ namespace FOREALProjectWinForm
         {
             InitializeComponent();
         }
+
         private void BtnExit_Click(object sender, EventArgs e)
         {
             this.Hide();
             Dashboard ds = new Dashboard();
             ds.Show();
         }
+
         private void DonationClear()
         {
             txtNameDonator.Clear();
@@ -32,6 +27,7 @@ namespace FOREALProjectWinForm
             txtQuantity.Clear();
             dateTimePicker1.ResetText();
         }
+
         private void OutDonation(out string name, out string location, out string foodType, out int quantity, out DateTime dateTime)
         {
             name = txtNameDonator.Text;
@@ -40,6 +36,7 @@ namespace FOREALProjectWinForm
             quantity = Convert.ToInt32(txtQuantity.Text);
             dateTime = dateTimePicker1.Value;
         }
+
         private static void InputDonation(string name, string location, string foodType, int quantity, DateTime dateTime, SqlCommand cmd)
         {
             cmd.CommandText = "insert into AddDonation values('" + name + "','" + location + "','" + foodType + "'," + quantity + ",'" + dateTime + "')";
@@ -48,6 +45,7 @@ namespace FOREALProjectWinForm
             DataSet DS = new DataSet();
             DA.Fill(DS);
         }
+
         private void SubmitDonation_Click(object sender, EventArgs e)
         {
             try
@@ -60,7 +58,8 @@ namespace FOREALProjectWinForm
                 SqlCommand cmd = SqlConnection.GetSqlCon();
 
                 InputDonation(name, location, foodType, quantity, dateTime, cmd);
-                MessageBox.Show("Food Donated! Thank you");
+                MessageBox.Show("Food Donated! Thank you", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                SqlConnection.CloseSqlCon();
             }
             catch (Exception)
             {

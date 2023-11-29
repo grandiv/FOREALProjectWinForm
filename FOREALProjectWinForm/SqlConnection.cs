@@ -1,5 +1,4 @@
 ﻿using System.Data.SqlClient;
-using System.Net.NetworkInformation;
 
 internal static class SqlConnection
 {

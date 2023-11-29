@@ -89,7 +89,7 @@
             this.txtPasswordNew.Size = new System.Drawing.Size(190, 16);
             this.txtPasswordNew.TabIndex = 13;
             this.txtPasswordNew.Text = "Password";
-            this.txtPasswordNew.MouseClick += new System.Windows.Forms.MouseEventHandler(this.txtPasswordNew_MouseClick);
+            this.txtPasswordNew.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TxtPasswordNew_MouseClick);
             // 
             // txtUsernameNew
             // 
@@ -102,7 +102,7 @@
             this.txtUsernameNew.Size = new System.Drawing.Size(190, 16);
             this.txtUsernameNew.TabIndex = 12;
             this.txtUsernameNew.Text = "Username";
-            this.txtUsernameNew.MouseClick += new System.Windows.Forms.MouseEventHandler(this.txtUsernameNew_MouseClick);
+            this.txtUsernameNew.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TxtUsernameNew_MouseClick);
             // 
             // panel1
             // 
@@ -124,7 +124,7 @@
             this.btnRegis.TabIndex = 18;
             this.btnRegis.Text = "Sign Up";
             this.btnRegis.UseVisualStyleBackColor = false;
-            this.btnRegis.Click += new System.EventHandler(this.btnRegis_Click);
+            this.btnRegis.Click += new System.EventHandler(this.BtnRegis_Click);
             // 
             // pictureBox1
             // 
@@ -148,7 +148,7 @@
             this.btnClose.TabIndex = 20;
             this.btnClose.Text = "X";
             this.btnClose.UseVisualStyleBackColor = false;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            this.btnClose.Click += new System.EventHandler(this.BtnClose_Click);
             // 
             // btnGoBack
             // 
@@ -162,7 +162,7 @@
             this.btnGoBack.Size = new System.Drawing.Size(23, 23);
             this.btnGoBack.TabIndex = 21;
             this.btnGoBack.UseVisualStyleBackColor = false;
-            this.btnGoBack.Click += new System.EventHandler(this.btnGoBack_Click);
+            this.btnGoBack.Click += new System.EventHandler(this.BtnGoBack_Click);
             // 
             // panel3
             // 
@@ -183,7 +183,7 @@
             this.txtEmail.Size = new System.Drawing.Size(190, 16);
             this.txtEmail.TabIndex = 15;
             this.txtEmail.Text = "Email";
-            this.txtEmail.MouseClick += new System.Windows.Forms.MouseEventHandler(this.txtEmail_MouseClick);
+            this.txtEmail.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TxtEmail_MouseClick);
             // 
             // pictureBox2
             // 
