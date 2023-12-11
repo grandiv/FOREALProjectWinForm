@@ -57,7 +57,7 @@ namespace FOREALProjectWinForm
             cmdDelete.ExecuteNonQuery();
         }
 
-        private static void InserVolunteer(string name, string contactNumber, string selectedData, System.Data.SqlClient.SqlConnection con)
+        private static void InsertVolunteer(string name, string contactNumber, string selectedData, System.Data.SqlClient.SqlConnection con)
         {
             SqlCommand cmdInsert = new SqlCommand();
             cmdInsert.Connection = con;
@@ -104,7 +104,7 @@ namespace FOREALProjectWinForm
                 }
 
                 System.Data.SqlClient.SqlConnection con = SqlConnect();
-                InserVolunteer(name, contactNumber, selectedData, con);
+                InsertVolunteer(name, contactNumber, selectedData, con);
 
                 string[] selectedDataParts = selectedData.Split('-');
                 string recipientName = selectedDataParts[0].Trim();
