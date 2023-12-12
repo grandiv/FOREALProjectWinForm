@@ -51,8 +51,6 @@ namespace FOREAL_API.Controllers
                 response.StatusCode = 200;
                 response.Message = "Success";
                 response.Donations = donationList;
-
-                // Serialize the response object using Newtonsoft.Json
                 var serializedResponse = JsonConvert.SerializeObject(response);
                 return Ok(JsonConvert.DeserializeObject<Response>(serializedResponse));
             }
@@ -60,8 +58,6 @@ namespace FOREAL_API.Controllers
             {
                 response.StatusCode = 404;
                 response.Message = "No data found";
-
-                // Serialize the response object using Newtonsoft.Json
                 var serializedResponse = JsonConvert.SerializeObject(response);
                 return Ok(JsonConvert.DeserializeObject<Response>(serializedResponse));
             }
