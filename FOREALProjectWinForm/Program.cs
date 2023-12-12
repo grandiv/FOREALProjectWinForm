@@ -16,7 +16,8 @@ namespace FOREALProjectWinForm
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new LoginForm());
+            IUserRepository userRepository = new SqlUserRepository();
+            Application.Run(new LoginForm(userRepository));
         }
     }
 }

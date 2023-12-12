@@ -14,7 +14,8 @@ namespace FOREALProjectWinForm
         private void OpenLoginForm()
         {
             this.Hide();
-            LoginForm logForm = new LoginForm();
+            IUserRepository userRepository = new SqlUserRepository();
+            LoginForm logForm = new LoginForm(userRepository);
             logForm.Show();
             txtUsernameNew.Clear();
             txtPasswordNew.Clear();
@@ -71,7 +72,8 @@ namespace FOREALProjectWinForm
         private void BtnGoBack_Click(object sender, EventArgs e)
         {
             this.Hide();
-            LoginForm lf = new LoginForm();
+            IUserRepository userRepository = new SqlUserRepository();
+            LoginForm lf = new LoginForm(userRepository);
             lf.Show();
         }
 

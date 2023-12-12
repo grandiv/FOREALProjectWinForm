@@ -12,12 +12,6 @@ namespace FOREALProjectWinForm
             InitializeComponent();
         }
 
-        private void OutLogin(out string username, out string pass)
-        {
-            username = txtUsername.Text;
-            pass = txtPassword.Text;
-        }
-
         private static void CredentialCheck(string username, string pass, SqlCommand cmd)
         {
             cmd.CommandText = "SELECT * FROM loginTable WHERE username = @username AND pass = @password";
@@ -69,20 +63,22 @@ namespace FOREALProjectWinForm
             dsa.Show();
         }
 
+        private readonly IUserRepository _userRepository;
+
+        public LoginForm(IUserRepository userRepository)
+        {
+            InitializeComponent();
+            _userRepository = userRepository;
+        }
+
         private void BtnLogin_Click(object sender, EventArgs e)
         {
             try
             {
-                string username, pass;
-                OutLogin(out username, out pass);
+                string username = txtUsername.Text;
+                string password = txtPassword.Text;
 
-                SqlCommand cmd = SqlConnection.GetSqlCon();
-
-                CredentialCheck(username, pass, cmd);
-
-                DataSet ds = SqlAdapter(cmd);
-
-                if (ds.Tables[0].Rows.Count != 0)
+                if (_userRepository.ValidateUser(username, password))
                 {
                     OpenMainDashboard();
                 }
@@ -90,7 +86,6 @@ namespace FOREALProjectWinForm
                 {
                     MessageBox.Show("Wrong Username or Password", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                SqlCommand cmdclose = SqlConnection.CloseSqlCon();
             }
             catch (Exception ex)
             {

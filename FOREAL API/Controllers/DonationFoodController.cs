@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -11,7 +13,7 @@ namespace FOREAL_API.Controllers
     [ApiController]
     public class DonationFoodController : ControllerBase
     {
-        public readonly IConfiguration _configuration;
+        private readonly IConfiguration _configuration;
 
         public DonationFoodController(IConfiguration configuration)
         {
@@ -20,7 +22,8 @@ namespace FOREAL_API.Controllers
 
         [HttpGet]
         [Route("GetAllDonationFood")]
-        public string GetDonationFood()
+        [ProducesResponseType(typeof(Response), StatusCodes.Status200OK)]
+        public IActionResult GetDonationFood()
         {
             SqlConnection con = new SqlConnection(_configuration.GetConnectionString("FOREALAppCon").ToString());
             SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM AddDonation", con);
@@ -28,6 +31,7 @@ namespace FOREAL_API.Controllers
             da.Fill(dt);
             List<Donation> donationList = new List<Donation>();
             Response response = new Response();
+
             if (dt.Rows.Count > 0)
             {
                 for (int i = 0; i < dt.Rows.Count; i++)
@@ -41,13 +45,25 @@ namespace FOREAL_API.Controllers
                     donationList.Add(donation);
                 }
             }
+
             if (donationList.Count > 0)
-                return JsonConvert.SerializeObject(donationList);
+            {
+                response.StatusCode = 200;
+                response.Message = "Success";
+                response.Donations = donationList;
+
+                // Serialize the response object using Newtonsoft.Json
+                var serializedResponse = JsonConvert.SerializeObject(response);
+                return Ok(JsonConvert.DeserializeObject<Response>(serializedResponse));
+            }
             else
             {
-                response.StatusCode = 100;
-                response.ErrorMessage = "No data found";
-                return JsonConvert.SerializeObject(response);
+                response.StatusCode = 404;
+                response.Message = "No data found";
+
+                // Serialize the response object using Newtonsoft.Json
+                var serializedResponse = JsonConvert.SerializeObject(response);
+                return Ok(JsonConvert.DeserializeObject<Response>(serializedResponse));
             }
         }
 

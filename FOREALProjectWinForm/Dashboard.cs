@@ -27,7 +27,8 @@ namespace FOREALProjectWinForm
         private void BtnLogOut_Click(object sender, EventArgs e)
         {
             this.Hide();
-            LoginForm lf = new LoginForm();
+            IUserRepository userRepository = new SqlUserRepository();
+            LoginForm lf = new LoginForm(userRepository);
             lf.Show();
         }
 
